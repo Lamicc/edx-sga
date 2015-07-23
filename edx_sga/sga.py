@@ -66,39 +66,38 @@ class StaffGradedAssignmentXBlock(XBlock):
 
     display_name = String(
         default='Staff Graded Assignment', scope=Scope.settings,
-        help="This name appears in the horizontal navigation at the top of "
-             "the page."
+        help="此名称显示在页面顶端的水平导航栏内。"
     )
 
     weight = Float(
-        display_name="Problem Weight",
-        help=("Defines the number of points each problem is worth. "
-              "If the value is not set, the problem is worth the sum of the "
-              "option point values."),
+        display_name="问题权重",
+        help=("设定每个问题的分值。"
+              "如果没有设定分值，问题分值将与总分值相同。"
+              ),
         values={"min": 0, "step": .1},
         scope=Scope.settings
     )
 
     points = Integer(
-        display_name="Maximum score",
-        help=("Maximum grade score given to assignment by staff."),
+        display_name="最高评分",
+        help=("教员可评的最高分数。"),
         default=100,
         scope=Scope.settings
     )
 
     staff_score = Integer(
-        display_name="Score assigned by non-instructor staff",
-        help=("Score will need to be approved by instructor before being "
-              "published."),
+        display_name="非导师教员评分",
+        help=("此评分需要通过导师的批准才可发布。"
+              ),
         default=None,
         scope=Scope.settings
     )
 
     comment = String(
-        display_name="Instructor comment",
+        display_name="导师评论",
         default='',
         scope=Scope.user_state,
-        help="Feedback given to student by instructor."
+        help="导师向学生反馈的意见。"
     )
 
     annotated_sha1 = String(
@@ -124,10 +123,10 @@ class StaffGradedAssignmentXBlock(XBlock):
     )
 
     annotated_timestamp = DateTime(
-        display_name="Timestamp",
+        display_name="时间戳",
         scope=Scope.user_state,
         default=None,
-        help="When the annotated file was uploaded")
+        help="上传注释文件的时间。")
 
     def max_score(self):
         """
