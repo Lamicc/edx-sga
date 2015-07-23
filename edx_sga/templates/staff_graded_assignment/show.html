@@ -1,5 +1,7 @@
 {% load i18n %}
-
+<head>
+<meta charset="utf-8">
+</head>
 <div class="sga-block" data-state="{{ student_state }}" data-max-size="{{ max_file_size }}"
      data-staff="{{ is_course_staff }}">
   <script type="text/template" id="sga-tmpl">
@@ -7,7 +9,7 @@
        <b><%= display_name %></b>
     <% } %>
     <% if (uploaded) { %>
-      <p><b>File uploaded</b> 
+      <p><b>File uploaded</b>
         <a href="<%= downloadUrl %>"><%= uploaded.filename %></a></p>
     <% } else { %>
       <p>No file has been uploaded.</p>
@@ -23,14 +25,14 @@
         <% } %>
       </p>
     <% } else if (uploaded) { %>
-      {% trans "This assignment has not yet been graded." %}
+      {% trans "此任务尚未评分。" %}
     <% } %>
     <% if (upload_allowed) { %>
     <p>
       <% if (uploaded) { %>
-        {% trans "Upload a different file" %}
+        {% trans "上传另一文件" %}
       <% } else { %>
-        {% trans "Upload your assignment" %}
+        {% trans "上传您的任务" %}
       <% } %>
       <div class="upload">
         <input class="fileupload" type="file" name="assignment"/>
@@ -76,7 +78,7 @@
               <%= assignment.score %> /
               <%= max_score %>
               <% if (! assignment.approved) { %>
-                ({% trans "Awaiting instructor approval" %})
+                ({% trans "等待导师批准" %})
               <% } %>
             <% } %>
           </td>
@@ -92,9 +94,9 @@
             <% if (assignment.may_grade) { %>
               <a class="enter-grade-button button" href="#{{ id }}-enter-grade">
                 <% if (assignment.needs_approval) { %>
-                  {% trans "Approve grade" %}
+                  {% trans "批准评分" %}
                 <% } else { %>
-                  {% trans "Enter grade" %}
+                  {% trans "输入评分" %}
                 <% } %>
               </a>
            <% } %>
@@ -112,14 +114,14 @@
 
   <div aria-hidden="true" class="wrap-instructor-info">
     <a class="instructor-info-action" id="grade-submissions-button"
-       href="#{{ id }}-grade">{% trans "Grade Submissions" %}</a>
+       href="#{{ id }}-grade">{% trans "评分意见" %}</a>
     <a class="instructor-info-action" id="staff-debug-info-button"
-       href="#{{ id }}-debug">{% trans "Staff Debug Info" %}</a>
+       href="#{{ id }}-debug">{% trans "员工调试信息" %}</a>
   </div>
 
   <section aria-hidden="true" class="modal staff-modal" id="{{ id }}-grade" style="height: 75%">
     <div class="inner-wrapper" style="color: black; overflow: auto;">
-      <header><h2><span class="display_name">{{ display_name }}</span> - {% trans "Staff Graded Assignment" %}</h2></header>
+      <header><h2><span class="display_name">{{ display_name }}</span> - {% trans "已评任务" %}</h2></header>
       <br/>
       <div id="grade-info" style="display: block;">
         Loading...
@@ -127,17 +129,17 @@
     </div>
   </section>
 
-  <section aria-hidden="true" class="modal staff-modal" 
+  <section aria-hidden="true" class="modal staff-modal"
            style="height: 80%" id="{{ id }}-debug">
     <div class="inner-wrapper" style="color: black">
-      <header><h2>{% trans "Staff Debug" %}</h2></header>
+      <header><h2>{% trans "员工调试" %}</h2></header>
       <br/>
       <div class="staff_info" style="display: block; white-space: normal">
         is_released = {{ is_released }}<br/>
         location = {{ location }}<br/>
         <br/>
         <table summary="${_('Module Fields')}">
-          <tr><th>{% trans "Module Fields" %}</th></tr>
+          <tr><th>{% trans "组件区" %}</th></tr>
           {% for name, field in fields %}
           <tr>
             <td>{{name}}</td>
@@ -155,7 +157,7 @@
   <section aria-hidden="true" class="modal grade-modal" id="{{ id }}-enter-grade">
     <div class="inner-wrapper" style="color: black">
       <header><h2>
-        {% trans "Enter Grade" %}
+        {% trans "输入评分" %}
       </h2></header>
       <br/>
       <div style="display: block;">
@@ -169,10 +171,10 @@
           <div>
             <button type="submit">{% trans "Submit" %}</button>
             <button type="button" id="enter-grade-cancel">
-              {% trans "Cancel" %}
+              {% trans "取消" %}
             </button>
             <button type="button" id="remove-grade">
-              {% trans "Remove grade" %}
+              {% trans "删除评分" %}
             </button>
           </div>
         </form>
